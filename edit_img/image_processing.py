@@ -9,7 +9,7 @@ from datetime import datetime
 # title: 文字列(タイトル)
 # 返り値: (なし)
 def image_show(img, title=""):
-    plt.imshow(img)
+    plt.imshow(img, cmap='gray')
     plt.title(title)
     plt.show()
 

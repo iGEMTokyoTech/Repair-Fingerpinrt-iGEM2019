@@ -4,12 +4,13 @@ import collections
 from matplotlib import pyplot as plt
 from datetime import datetime
 
+from edit_img import image_processing
+from graph.histgram_maker import make_hist
+
+
 # 円のマスクを作成
 # radius: 整数(半径)
 # 返り値: 2次元配列(半径の2倍+1の大きさ)
-from edit_img import image_processing
-
-
 def make_mask(radius):
     result = np.zeros((radius * 2 + 1, radius * 2 + 1))
     for y in range(0, radius * 2):
@@ -96,11 +97,14 @@ def get_width(thined_img, scan_line_pairs=1, *, debug=False):
     for i in range(scan_line_pairs):
         radius_list += get_radius_list(thined_img, [int(width / (scan_line_pairs + 1) * (i + 1)),
                                                     int(height / (scan_line_pairs + 1) * (i + 1))], debug=debug)
+    if debug:
+        # histogram
+        make_hist(radius_list)
     return collections.Counter(radius_list).most_common()[0][0]
 
 
 if __name__ == '__main__':
-    img = image_processing.load_image_grayscale("../picture_edit/img/fingerprint.png")
+    img = image_processing.load_image_grayscale("../data/img/fingerprint.png")
     img = image_processing.blur(img)
     img = image_processing.threshold(img)
     img = image_processing.bitwise_not(img)

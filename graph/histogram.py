@@ -36,3 +36,14 @@ def width_hist(img, file="./histogram.png", debug=False):
     ax.set(ylabel='the number of circles', xlabel='radius of circle')
     plt.savefig(file)
     plt.show()
+
+
+
+
+def main():
+    # sample code
+    print("histogram")
+
+
+if __name__ == "__main__":
+    main()
